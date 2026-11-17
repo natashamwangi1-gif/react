@@ -1,0 +1,29 @@
+{"reports":[
+    {
+     "id":1,
+    "title":"pothole on the road",
+    "location":"Nyali,Mombasa",
+    "description":"There is a large pothole near the road needs repair",
+    "status":"pending",
+    "latitude":-4.05241,
+    "longitude":39.69567
+    },
+    {
+      "id":2,
+      "title":"blocked drainage",
+      "location":"Karen, Nairobi",
+      "description":"Stormwater drain is clogged along the main road",
+      "status":"In progress",
+      "latitude":-1.32838,
+      "longitude":36.70497
+    },
+    {
+        "id":3,
+        "title":"broken streetlight",
+        "location":"Kasarani, Nairobi",
+        "description":"Streetlight pole near the junction has been out for three nights.",
+        "status":"pending",
+        "latitude":-1.2197,
+        "longitude":36.8911
+    }
+]}
