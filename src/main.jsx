@@ -1,11 +1,17 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import {BrowserRouter} from "react-dom/client"
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
+import { ReportProvider } from './context/ReportContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <BrowserRouter>
+    <ReportProvider>
     <App />
+    </ReportProvider>
+    </BrowserRouter>
   </StrictMode>,
 )
