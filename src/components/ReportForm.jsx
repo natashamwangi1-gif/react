@@ -1,22 +1,49 @@
 import { useState } from "react";
-export default function ReportForm({location,setLocation,coords,onAddReport,onClose}){
+export default function ReportForm({location,setLocation,coords,setCoords,onAddReport,onClose}){
     const [category, setCategory]=useState("")
     const [otherIssue,setOtherIssue]=useState("")
     const[description,setDescription]=useState("")
 
-    function handleSubmit(e){
+    async function handleFindLocation(){
+        if(!location.trim())return
+        try{
+            const res =await fetch (
+            `https://nominatim.openstreetmap.org/search?format=json&countrycodes=ke&q=${encodeURIComponent(location)}`
+            )
+            const data=await res.json()
+            if(data && data.length> 0){
+                const lat=parseFloat(data[0].lat)
+                const lng=parseFloat(data[0].lon)
+                setCoords({lat,lng})
+                return{lat,lng}
+            }
+        }catch(err){
+            console.error("Geocoding error:",err)
+        }
+        return coords
+    }
+    async function handleLocateClick(){
+        await handleFindLocation()
+            const mapSection=document.getElementById("map-sec")
+            if(mapSection){
+                mapSection.scrollIntoView({behavior:"smooth",block:"center"})
+            }
+        
+    }
+    async function handleSubmit(e){
         e.preventDefault()
 
         const finalTitle=category==="other" ?otherIssue:category
+        const finalCoords=await handleFindLocation()
 
         const newReport={
-            id: Date.now(),
+            id:String(Date.now()),
             title:finalTitle,
             location:location,
             description:description,
             status:"pending",
-            latitude:coords.lat,
-            longitude:coords.lng,
+            latitude:finalCoords.lat,
+            longitude:finalCoords.lng,
         }
         onAddReport(newReport)
         setCategory("")
@@ -60,6 +87,9 @@ export default function ReportForm({location,setLocation,coords,onAddReport,onCl
                             className="form-control"
                             value={location}
                             onChange={(e)=>setLocation(e.target.value)}required />
+                            <button type="button"
+                            className="btn btn-outline-success"
+                            onClick={handleLocateClick}>Locate on Map</button>
                     </div>
                     <div className="mb-3">
                         <label className="form-label fw-semibold">Description</label>

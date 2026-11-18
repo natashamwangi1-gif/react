@@ -1,3 +1,7 @@
+import{Link}from "react-router-dom"
+import { useReports } from "../context/ReportContext" 
+
+
 export default function Hero({onOpenForm}){
     return(
         <div id="home" className="p-5 mb-5 text-white rounded-4 shadow lg text-center"

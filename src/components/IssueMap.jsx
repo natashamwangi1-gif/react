@@ -3,13 +3,15 @@ import L from "leaflet"
 
 
 
-export default function IssueMap({reports, onSelectLocation}){
+export default function IssueMap({reports, coords, onSelectLocation}){
 useEffect(()=>{
     const container=document.getElementById("map") 
     if(!container)return
     if(container._leaflet_id)container._leaflet_id=null
     
-   const map=L.map("map").setView([-4.05241,39.70948],13)
+    const centreLat=coords?.lat ||-1.286389
+    const centreLng=coords?.lng ||36.817223
+   const map=L.map("map").setView([centreLat, centreLng],13)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
       attribution :"&copy;OpenStreetMap constributors",
     }).addTo(map)
@@ -18,8 +20,16 @@ useEffect(()=>{
         L.marker([report.latitude,report.longitude])
         .addTo(map)
         .bindPopup(`<strong>${report.title}</strong><br>${report.description}`)
+        
     })
     let clickedPin=null
+
+    if(coords?.lat && coords?.lng){
+        L.marker([coords.lat,coords.lng])
+        .addTo(map)
+        .bindPopup("Selected/Searched location")
+        .openPopup()
+    }
 
     map.on("click", (e)=>{
       const{lat,lng}=e.latlng
@@ -34,7 +44,7 @@ useEffect(()=>{
       .openPopup()
     })
     return()=>map.remove()
-   },[reports])
+   },[reports, coords])
 
    
 

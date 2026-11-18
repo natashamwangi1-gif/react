@@ -1,29 +1,65 @@
-{"reports":[
+{
+  "reports": [
     {
-     "id":1,
-    "title":"pothole on the road",
-    "location":"Nyali,Mombasa",
-    "description":"There is a large pothole near the road needs repair",
-    "status":"pending",
-    "latitude":-4.05241,
-    "longitude":39.69567
+      "id": "1",
+      "title": "pothole on the road",
+      "location": "Nyali,Mombasa",
+      "description": "There is a large pothole near the road needs repair",
+      "status": "pending",
+      "latitude": -4.05241,
+      "longitude": 39.69567
     },
     {
-      "id":2,
-      "title":"blocked drainage",
-      "location":"Karen, Nairobi",
-      "description":"Stormwater drain is clogged along the main road",
-      "status":"In progress",
-      "latitude":-1.32838,
-      "longitude":36.70497
+      "id": "2",
+      "title": "blocked drainage",
+      "location": "Karen, Nairobi",
+      "description": "Stormwater drain is clogged along the main road",
+      "status": "In progress",
+      "latitude": -1.32838,
+      "longitude": 36.70497
     },
     {
-        "id":3,
-        "title":"broken streetlight",
-        "location":"Kasarani, Nairobi",
-        "description":"Streetlight pole near the junction has been out for three nights.",
-        "status":"pending",
-        "latitude":-1.2197,
-        "longitude":36.8911
+      "id": "VPALG8j9Pw0",
+      "title": "Garbage Dump",
+      "location": "Westlands,Nairobi",
+      "description": "Too much garbage is dumped along the road.",
+      "status": "pending",
+      "latitude": -1.2465281,
+      "longitude": 36.7860759
+    },
+    {
+      "id": "C3yWuPKqQEk",
+      "title": "flooded water",
+      "location": "lower hill road",
+      "description": "too much water on the roads",
+      "status": "pending",
+      "latitude": -1.2962731,
+      "longitude": 36.8184086
     }
-]}
+  ],
+ 
+  "communities":[
+    {
+        "id":"c1",
+        "name":"Westlands Residents Association",
+        "area":"Westlands,Nairobi",
+        "description":"Keeping westlands clean, safe, and well-lit",
+        "memebers":"35"
+    },
+{
+     "id":"c2",
+        "name":"Nyali neighbourhood watch",
+        "area":"Nyali,Mombasa",
+        "description":"Reporting issues across Nyali",
+        "memebers":"48"
+},
+{
+     "id":"c3",
+        "name":"Karen green estate",
+        "area":"Karen, Nairobi",
+        "description":"Community action for public spaces in Karen",
+        "members":"62"
+}
+
+  ]
+}

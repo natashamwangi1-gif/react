@@ -1,63 +1,81 @@
- import { useState, useEffect,  } from 'react'
+ import { useReports  } from "./context/ReportContext"
+ import {Routes, Route}from "react-router-dom"
+ import "./App.css"
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ReportForm from './components/ReportForm';
 import IssueMap from './components/IssueMap';
 import ReportList from './components/ReportList';
+import ReportDetails from "./components/ReportDetails";
+import CommunityAuth from "./components/communityAuth";
 
 
 export default function App(){
-  const[reports, setReports]=useState([
-    {
-    "id":1,
-    "title":"pothole on the road",
-    "location":"Nyali,Mombasa",
-    "description":"There is a large pothole near the road needs repair",
-    "status":"pending",
-    "latitude":-4.05241,
-    "longitude":39.69567,
-    },
-    {
-      "id":2,
-      "title":"blocked drainage",
-      "location":"Karen, Nairobi",
-      "description":"Stormwater drain is clogged along the main road",
-      "status":"In progress",
-      "latitude":"-1.32838",
-      "longitude":"36.70497",
+  const{reports,
+    addReport,
+    showForm,
+    setShowForm,
+    location,
+    setLocation,
+    coords,
+    setCoords,
+    selectLocation
+  }=useReports()
 
-    }
-  ])
 
-   const [showForm, setShowForm]= useState(false)
-   const[location,setLocation]=useState("")
-   const[coords,setCoords]=useState({lat:-4.05241,lng:39.70948})
+const renderFormModal=()=>
+  showForm &&(
+    <ReportForm
+    location={location}
+    setLocation={setLocation}
+    coords={coords}
+    setCoords={setCoords}
+    onAddReport={addReport}
+    onClose={()=>{
+      setLocation("")
+      setShowForm(false)
+    }}
+    />
+  )
 
-   function handleAddReport(newReport){
-    setReports([newReport,...reports])
-   }
-   function handleSelectLocation(lat,lng){
-    setCoords({lat,lng})
-    setLocation(`${lat.toFixed(5)}, ${lng.toFixed(5)}`)
-    setShowForm(true)
-   }
-   return(
-    <div className="bg-light min-vh-100">
-      <Navbar/>
-      <div className='container py-4'>
+  return(
+    <div className="bg-light min-vh-100 d-flex flex-column"
+    ><Navbar/>
+    <main className="container py-4 flex-grow-1">
+      <Routes>
+        <Route 
+        path="/"
+        element={<>
         <Hero onOpenForm={()=>setShowForm(true)}/>
-          {showForm &&(
-            <ReportForm location={location}
-            setLocation={setLocation}
-            coords={coords}
-            onAddReport={handleAddReport}
-            onClose={()=>{setLocation("")
-              setShowForm(false)}}/>
-          )}
-          
-          <IssueMap reports={reports} onSelectLocation={handleSelectLocation}/>
+          {renderFormModal()}
+          <IssueMap reports={reports} coords={coords} onSelectLocation={selectLocation}/>
           <ReportList reports={reports}/>
-      </div>
+          </>}
+          />
+         <Route path="/map"
+          element={<>
+          {renderFormModal()}
+          <IssueMap reports={reports} coords={coords} onSelectLocation={selectLocation}/>
+          </>
+          }
+          />
+          <Route path="/reports"
+          element={
+            <><div className="d-flex justify-content-between align-items-center mb-4">
+              <h2 className="fw-bold mb-0">All community reports</h2>
+              <button className="btn btn-success rounded-pill px-4" onClick={()=>setShowForm(true)}>
+                +Report an issue
+              </button>
+            </div>
+            {renderFormModal()}
+            <ReportList reports={reports}/>
+            </>
+          }
+          />
+          <Route path="/reports/:id" element={<ReportDetails />} />
+          <Route path="/community" element={<CommunityAuth />} />
+      </Routes>
+    </main>
     </div>
-   )
-  }
+  )
+}
