@@ -1,5 +1,9 @@
 import { useState } from "react";
-export default function ReportForm({location,setLocation,coords,setCoords,onAddReport,onClose}){
+import { useReports } from "../context/ReportContext";
+
+
+export default function ReportForm(){
+    const{location,setLocation,coords,setCoords,onAddReport, setShowForm}=useReports()
     const [category, setCategory]=useState("")
     const [otherIssue,setOtherIssue]=useState("")
     const[description,setDescription]=useState("")
@@ -34,7 +38,7 @@ export default function ReportForm({location,setLocation,coords,setCoords,onAddR
         e.preventDefault()
 
         const finalTitle=category==="other" ?otherIssue:category
-        const finalCoords=await handleFindLocation()
+        const finalCoords=coords||(await handleFindLocation())||{lat:-1.286389, lng:36.817223}
 
         const newReport={
             id:String(Date.now()),
@@ -45,12 +49,12 @@ export default function ReportForm({location,setLocation,coords,setCoords,onAddR
             latitude:finalCoords.lat,
             longitude:finalCoords.lng,
         }
-        onAddReport(newReport)
+        addReport(newReport)
         setCategory("")
         setOtherIssue("")
         setLocation("")
         setDescription("")
-        onClose()
+        setShowForm(false)
     }
     return(
         <div className="card shadow-sm border-0 rounded-4 mb-4">
@@ -86,7 +90,9 @@ export default function ReportForm({location,setLocation,coords,setCoords,onAddR
                             <input type="text"
                             className="form-control"
                             value={location}
-                            onChange={(e)=>setLocation(e.target.value)}required />
+                            onChange={(e)=>{setLocation(e.target.value) 
+                                setCoords(null)
+                            }}/>
                             <button type="button"
                             className="btn btn-outline-success"
                             onClick={handleLocateClick}>Locate on Map</button>
@@ -100,7 +106,10 @@ export default function ReportForm({location,setLocation,coords,setCoords,onAddR
                     </div>
                     <button type="submit" className="btn btn-success px-4 me-2">Submit Report</button>
                     <button type="button" className="btn btn-outline-secondary px-4 me-2" 
-                    onClick={onClose}>Cancel</button>
+                    onClick={()=>{
+                        setLocation("")
+                        setShowForm(false)
+                    }}>Cancel</button>
                 </form>
             </div>
         </div>

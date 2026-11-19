@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import L from "leaflet"
+import { useReports } from "../context/ReportContext";
 
 
 
-export default function IssueMap({reports, coords, onSelectLocation}){
+export default function IssueMap(){
+    const{reports, coords,selectLocation}=useReports()
 useEffect(()=>{
     const container=document.getElementById("map") 
     if(!container)return
@@ -11,6 +13,7 @@ useEffect(()=>{
     
     const centreLat=coords?.lat ||-1.286389
     const centreLng=coords?.lng ||36.817223
+
    const map=L.map("map").setView([centreLat, centreLng],13)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
       attribution :"&copy;OpenStreetMap constributors",
@@ -20,9 +23,9 @@ useEffect(()=>{
         L.marker([report.latitude,report.longitude])
         .addTo(map)
         .bindPopup(`<strong>${report.title}</strong><br>${report.description}`)
-        
+
     })
-    let clickedPin=null
+    
 
     if(coords?.lat && coords?.lng){
         L.marker([coords.lat,coords.lng])
@@ -32,12 +35,10 @@ useEffect(()=>{
     }
 
     map.on("click", (e)=>{
-      const{lat,lng}=e.latlng
+      selectLocation(e.latlng.lat,e.latlng.lng)
       if (onSelectLocation) onSelectLocation(lat,lng)
 
-      if(clickedPin){
-        map.removeLayer(clickedPin)
-      }
+
       clickedPin=L.marker([lat,lng])
       .addTo(map)
       .bindPopup("Selected issue location")

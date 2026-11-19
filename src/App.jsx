@@ -11,32 +11,8 @@ import CommunityAuth from "./components/communityAuth";
 
 
 export default function App(){
-  const{reports,
-    addReport,
-    showForm,
-    setShowForm,
-    location,
-    setLocation,
-    coords,
-    setCoords,
-    selectLocation
-  }=useReports()
-
-
-const renderFormModal=()=>
-  showForm &&(
-    <ReportForm
-    location={location}
-    setLocation={setLocation}
-    coords={coords}
-    setCoords={setCoords}
-    onAddReport={addReport}
-    onClose={()=>{
-      setLocation("")
-      setShowForm(false)
-    }}
-    />
-  )
+  const{showForm,setShowForm}=useReports()
+    
 
   return(
     <div className="bg-light min-vh-100 d-flex flex-column"
@@ -46,16 +22,16 @@ const renderFormModal=()=>
         <Route 
         path="/"
         element={<>
-        <Hero onOpenForm={()=>setShowForm(true)}/>
-          {renderFormModal()}
-          <IssueMap reports={reports} coords={coords} onSelectLocation={selectLocation}/>
-          <ReportList reports={reports}/>
+        <Hero/>
+         {showForm && <ReportForm/>}
+          <IssueMap />
+          <ReportList />
           </>}
           />
          <Route path="/map"
           element={<>
-          {renderFormModal()}
-          <IssueMap reports={reports} coords={coords} onSelectLocation={selectLocation}/>
+          {showForm &&<ReportForm/>}
+          <IssueMap />
           </>
           }
           />
@@ -67,8 +43,8 @@ const renderFormModal=()=>
                 +Report an issue
               </button>
             </div>
-            {renderFormModal()}
-            <ReportList reports={reports}/>
+            {showForm &&<ReportForm/>}
+            <ReportList />
             </>
           }
           />

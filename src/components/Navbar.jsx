@@ -42,6 +42,8 @@ export default function Navbar(){
                     }> <span>Reports</span>
                     <span className="badge bg-light text-dark rounded-pill" 
                     style={{fontSize:"0.7rem"}}>{reports.length}</span></NavLink>
+
+                    
                     <NavLink to="/community"
                     className={({isActive})=>
                     `nav-link px-3 py-1 rounded-pill fw-semibold ${

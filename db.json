@@ -23,7 +23,7 @@
       "title": "Garbage Dump",
       "location": "Westlands,Nairobi",
       "description": "Too much garbage is dumped along the road.",
-      "status": "pending",
+      "status": "Resolved",
       "latitude": -1.2465281,
       "longitude": 36.7860759
     },
@@ -35,31 +35,42 @@
       "status": "pending",
       "latitude": -1.2962731,
       "longitude": 36.8184086
+    },
+    {
+      "id": "3HLO4Oj4B8k",
+      "title": "Garbage Dump",
+      "location": "-1.05991,36.54817",
+      "description": "too much garbage on the road side",
+      "status": "pending",
+      "latitude": -1.0684944,
+      "longitude": 36.4855348,
+      "communityid": null,
+      "communityName": "General public"
     }
   ],
- 
-  "communities":[
+  "communities": [
     {
-        "id":"c1",
-        "name":"Westlands Residents Association",
-        "area":"Westlands,Nairobi",
-        "description":"Keeping westlands clean, safe, and well-lit",
-        "memebers":"35"
+      "id": "c1",
+      "name": "Westlands Residents Association",
+      "area": "Westlands,Nairobi",
+      "description": "Keeping westlands clean, safe, and well-lit",
+      "memebers": "35",
+      "members": 12
     },
-{
-     "id":"c2",
-        "name":"Nyali neighbourhood watch",
-        "area":"Nyali,Mombasa",
-        "description":"Reporting issues across Nyali",
-        "memebers":"48"
-},
-{
-     "id":"c3",
-        "name":"Karen green estate",
-        "area":"Karen, Nairobi",
-        "description":"Community action for public spaces in Karen",
-        "members":"62"
-}
-
-  ]
+    {
+      "id": "c2",
+      "name": "Nyali neighbourhood watch",
+      "area": "Nyali,Mombasa",
+      "description": "Reporting issues across Nyali",
+      "members": "48"
+    },
+    {
+      "id": "c3",
+      "name": "Karen green estate",
+      "area": "Karen, Nairobi",
+      "description": "Community action for public spaces in Karen",
+      "members": "62"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

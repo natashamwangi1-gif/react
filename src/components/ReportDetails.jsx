@@ -29,8 +29,6 @@ export default function ReportDetails(){
             <div className="card-body p-4 p-md-5">
                 <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
                     <div>
-                        <h2 className="fw-bold mb-1">{report.title}</h2>
-                        <p className="text-success fw-semibold mb-0">{report.location}</p>
                          <div>
                             <h2 className="fw-bold mb-1">{report.title}</h2>
                             <p className="text-success fw-semibold mb-1">{report.location}</p>

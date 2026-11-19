@@ -6,9 +6,9 @@ export function ReportProvider({children}){
     const[reports, setReports]=useState([])
     const[showForm, setShowForm]=useState(false)
     const[location, setLocation]=useState("")
-    const[coords, setCoords]=useState({lat:1.2197, lng:36.8911})
+    const[coords, setCoords]=useState(null)
     const[communities,setcommunities]=useState([])
-    const [currentCommunity,setCurrentCommunity]=useState(()=>{
+    const[currentCommunity,setCurrentCommunity]=useState(()=>{
     const saved=localStorage.getItem("currentCommunity")
 return saved ?JSON.parse(saved):null})
 
@@ -111,7 +111,7 @@ return saved ?JSON.parse(saved):null})
         const communityToSave={
             ...newCommunity,
             id:`c${Date.now()}`,
-            members:1,
+            members:0,
         }
         fetch (COMMUNITIES_URL,{
             method:"POST",
