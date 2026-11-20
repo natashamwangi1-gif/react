@@ -11,9 +11,32 @@ import CommunityAuth from "./components/communityAuth";
 
 
 export default function App(){
-  const{showForm,setShowForm}=useReports()
-    
+  const {
+    reports,
+    addReport,
+    showForm,
+    setShowForm,
+    location, 
+    setLocation,
+    coords, 
+    setCoords,
+    selectLocation
+  }=useReports()
 
+  function renderForm(){
+    if(!showForm)return null
+    return(
+    <ReportForm location={location}
+    setLocation={setLocation}
+    coords={coords}
+    setCoords={setCoords}
+    onAddReport={addReport}
+    onClose={()=>{setLocation("")
+      setShowForm(false)
+    }}/>
+    )
+  }
+ 
   return(
     <div className="bg-light min-vh-100 d-flex flex-column"
     ><Navbar/>
@@ -23,15 +46,15 @@ export default function App(){
         path="/"
         element={<>
         <Hero/>
-         {showForm && <ReportForm/>}
-          <IssueMap />
+         {renderForm()}
+          <IssueMap reports={reports} coords={coords} onSelectLocation={selectLocation}/>
           <ReportList />
           </>}
           />
          <Route path="/map"
           element={<>
-          {showForm &&<ReportForm/>}
-          <IssueMap />
+          {renderForm()}
+          <IssueMap reports={reports} coords={coords} onSelectLocation={selectLocation}/>
           </>
           }
           />
@@ -43,7 +66,8 @@ export default function App(){
                 +Report an issue
               </button>
             </div>
-            {showForm &&<ReportForm/>}
+            {renderForm()}
+          
             <ReportList />
             </>
           }

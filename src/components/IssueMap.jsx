@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import L from "leaflet"
-import { useReports } from "../context/ReportContext";
 
-
-
-export default function IssueMap(){
-    const{reports, coords,selectLocation}=useReports()
+export default function IssueMap({reports, coords,onSelectLocation}){
 useEffect(()=>{
     const container=document.getElementById("map") 
     if(!container)return
@@ -25,7 +21,7 @@ useEffect(()=>{
         .bindPopup(`<strong>${report.title}</strong><br>${report.description}`)
 
     })
-    
+    let clickedPin=null
 
     if(coords?.lat && coords?.lng){
         L.marker([coords.lat,coords.lng])
@@ -35,11 +31,14 @@ useEffect(()=>{
     }
 
     map.on("click", (e)=>{
-      selectLocation(e.latlng.lat,e.latlng.lng)
+      const{lat,lng}=e.latlng
       if (onSelectLocation) onSelectLocation(lat,lng)
 
+if(clickedPin){
+    map.removeLayer(clickedPin)
+}
 
-      clickedPin=L.marker([lat,lng])
+     clickedPin=L.marker([lat,lng])
       .addTo(map)
       .bindPopup("Selected issue location")
       .openPopup()

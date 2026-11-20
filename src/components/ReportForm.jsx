@@ -22,7 +22,7 @@ export default function ReportForm(){
                 return{lat,lng}
             }
         }catch(err){
-            console.error("Geocoding error:",err)
+            console.error("Location search failed:",err)
         }
         return coords
     }
@@ -49,7 +49,7 @@ export default function ReportForm(){
             latitude:finalCoords.lat,
             longitude:finalCoords.lng,
         }
-        addReport(newReport)
+        onAddReport(newReport)
         setCategory("")
         setOtherIssue("")
         setLocation("")

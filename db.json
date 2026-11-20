@@ -55,7 +55,7 @@
       "area": "Westlands,Nairobi",
       "description": "Keeping westlands clean, safe, and well-lit",
       "memebers": "35",
-      "members": 12
+      "members": 13
     },
     {
       "id": "c2",
@@ -70,6 +70,13 @@
       "area": "Karen, Nairobi",
       "description": "Community action for public spaces in Karen",
       "members": "62"
+    },
+    {
+      "name": "kilimani neighbourhood watch",
+      "area": "kilimani,nairobi",
+      "description": "fixing kilimani",
+      "id": "tBhEM5AjJgA",
+      "members": 1
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
