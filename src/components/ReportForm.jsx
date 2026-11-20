@@ -3,7 +3,7 @@ import { useReports } from "../context/ReportContext";
 
 
 export default function ReportForm(){
-    const{location,setLocation,coords,setCoords,onAddReport, setShowForm}=useReports()
+    const{location,setLocation,coords,setCoords,addReport, setShowForm}=useReports()
     const [category, setCategory]=useState("")
     const [otherIssue,setOtherIssue]=useState("")
     const[description,setDescription]=useState("")
@@ -49,7 +49,7 @@ export default function ReportForm(){
             latitude:finalCoords.lat,
             longitude:finalCoords.lng,
         }
-        onAddReport(newReport)
+        addReport(newReport)
         setCategory("")
         setOtherIssue("")
         setLocation("")

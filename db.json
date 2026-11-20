@@ -1,24 +1,6 @@
 {
   "reports": [
     {
-      "id": "1",
-      "title": "pothole on the road",
-      "location": "Nyali,Mombasa",
-      "description": "There is a large pothole near the road needs repair",
-      "status": "pending",
-      "latitude": -4.05241,
-      "longitude": 39.69567
-    },
-    {
-      "id": "2",
-      "title": "blocked drainage",
-      "location": "Karen, Nairobi",
-      "description": "Stormwater drain is clogged along the main road",
-      "status": "In progress",
-      "latitude": -1.32838,
-      "longitude": 36.70497
-    },
-    {
       "id": "VPALG8j9Pw0",
       "title": "Garbage Dump",
       "location": "Westlands,Nairobi",
@@ -44,6 +26,28 @@
       "status": "pending",
       "latitude": -1.0684944,
       "longitude": 36.4855348,
+      "communityid": null,
+      "communityName": "General public"
+    },
+    {
+      "id": "yXtyHW5CLmU",
+      "title": "Broken Streetlight",
+      "location": "-1.28711,36.82165",
+      "description": "bleh",
+      "status": "pending",
+      "latitude": -1.28711065888449,
+      "longitude": 36.82165278940863,
+      "communityid": null,
+      "communityName": "General public"
+    },
+    {
+      "id": "QQZgZwnasEs",
+      "title": "Blocked drainage",
+      "location": "westlands",
+      "description": "bleh",
+      "status": "pending",
+      "latitude": -1.2465281,
+      "longitude": 36.7860759,
       "communityid": null,
       "communityName": "General public"
     }
